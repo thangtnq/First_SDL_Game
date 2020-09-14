@@ -1,0 +1,1 @@
+Only work with 32bit config. For 64 bit to work, please add 64bit library to DLL_file and reconfig the path
