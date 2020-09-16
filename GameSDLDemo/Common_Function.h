@@ -9,6 +9,8 @@ const int HEIGHT = 600;
 const int WIDTH = 1200;
 const int BPP = 32;
 const int NUM_THREAT = 3;
+const int BG_WIDTH = 4800;
+const int BG_HEIGHT = 600;
 
 extern SDL_Surface* g_screen;
 extern SDL_Surface* g_background;

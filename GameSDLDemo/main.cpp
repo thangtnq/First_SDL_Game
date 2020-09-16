@@ -10,11 +10,13 @@
 
 int main(int arc, char* argv[])
 {
+	bool is_RunSCreen = true;
+	int bkground_x = 0;
 	bool is_Quit = false;
 	if (!SDLCommonFunc::Init())
 		return 1;
 
-	g_background = SDLCommonFunc::LoadImage("Image/bk1.png");
+	g_background = SDLCommonFunc::LoadImage("Image/bg4800.png");
 
 	if (g_background == nullptr)
 		return 1;
@@ -62,8 +64,26 @@ int main(int arc, char* argv[])
 			humanObject.HandleInputAction(g_event);
 		}
 
-		//Apply background
-		SDLCommonFunc::ApplySurface(g_background, g_screen, 0, 0);
+		//Apply background case 1
+	/*	bkground_x -= 2;
+		SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x, 0);
+		SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x + WIDTH, 0);
+
+		if (bkground_x <= -WIDTH)
+			bkground_x = 0;*/
+
+		//Apply background case 2
+		if (is_RunSCreen)
+		{
+			bkground_x -= 2;
+			if (bkground_x <= WIDTH - BG_WIDTH)
+				is_RunSCreen = false;
+			else
+				SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x, 0);
+		}
+		else
+			SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x, 0);
+
 
 		//implement main object
 		humanObject.Show(g_screen);
