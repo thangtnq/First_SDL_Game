@@ -8,21 +8,10 @@
 #undef main
 
 
-bool Init()
-{
-	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
-		return false;
-	g_screen = SDL_SetVideoMode(WIDTH, HEIGHT, BPP, SDL_SWSURFACE);
-	if (g_screen == nullptr)
-		return false;
-	return true;
-}
-
-
 int main(int arc, char* argv[])
 {
 	bool is_Quit = false;
-	if (!Init())
+	if (!SDLCommonFunc::Init())
 		return 1;
 
 	g_background = SDLCommonFunc::LoadImage("Image/bk1.png");

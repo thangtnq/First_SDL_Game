@@ -36,3 +36,13 @@ void SDLCommonFunc::CleanUp()
 	SDL_FreeSurface(g_screen);
 	SDL_FreeSurface(g_background);
 }
+
+bool SDLCommonFunc::Init()
+{
+	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
+		return false;
+	g_screen = SDL_SetVideoMode(WIDTH, HEIGHT, BPP, SDL_SWSURFACE);
+	if (g_screen == nullptr)
+		return false;
+	return true;
+}

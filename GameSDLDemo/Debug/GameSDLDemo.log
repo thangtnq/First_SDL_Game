@@ -1,1 +1,3 @@
-﻿  GameSDLDemo.vcxproj -> C:\Users\Thang Tran\Desktop\SDL\GameSDLDemo\Debug\GameSDLDemo.exe
+﻿  main.cpp
+C:\Users\Thang Tran\Desktop\SDL\GameSDLDemo\GameSDLDemo\main.cpp(50,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  GameSDLDemo.vcxproj -> C:\Users\Thang Tran\Desktop\SDL\GameSDLDemo\Debug\GameSDLDemo.exe

@@ -16,6 +16,7 @@ extern SDL_Event g_event;
 
 namespace SDLCommonFunc
 {
+	bool Init();
 	SDL_Surface* LoadImage(std::string filePath);
 	void ApplySurface(SDL_Surface* src, SDL_Surface* des, const int& x, const int& y);
 	void CleanUp();
