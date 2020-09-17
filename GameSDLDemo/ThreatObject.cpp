@@ -74,7 +74,28 @@ void ThreatObject::HandleMove(const int& xBorder, const int& yBorder)
 	}
 }
 
-void ThreatObject::HandleInputACtion(SDL_Event e)
+void ThreatObject::HandleInputAction(SDL_Event e)
 {
 
+}
+
+void ThreatObject::Reset(const int& xBorder)
+{
+	rect.x = xBorder;
+	int rand_y = rand() % 400;
+	if (rand_y > HEIGHT - UNDER_LIMIT_THREAT)
+		rand_y = HEIGHT * 0.3;
+	rect.y = rand_y;
+
+	for (int i = 0; i < p_AmoList.size(); i++)
+	{
+		AmoObject* pAmo = p_AmoList.at(i);
+		if (pAmo != nullptr)
+			ResetAmo(pAmo);
+	}
+}
+
+void ThreatObject::ResetAmo(AmoObject* pAmo)
+{
+	pAmo->SetRect(rect.x, rect.y + rect.h * 0.5);
 }

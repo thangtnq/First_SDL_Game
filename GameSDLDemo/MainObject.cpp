@@ -118,3 +118,19 @@ void MainObject::makeAmo(SDL_Surface* des)
 		}
 	}
 }
+
+void MainObject::removeAmo(const int& idx)
+{
+	for (int i = 0; i < p_AmoList.size(); i++)
+	{
+		if(idx < p_AmoList.size())
+		{
+			AmoObject* pAmo = p_AmoList.at(idx);
+			p_AmoList.erase(p_AmoList.begin() + idx);
+			if (pAmo != nullptr)
+			{
+				delete pAmo;
+			}
+		}
+	}	
+}

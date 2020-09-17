@@ -16,16 +16,16 @@ int main(int arc, char* argv[])
 	if (!SDLCommonFunc::Init())
 		return 1;
 
-	g_background = SDLCommonFunc::LoadImage("Image/bg4800.png");
+	g_background = SDLCommonFunc::LoadImage("Image/bg600.png");
 
 	if (g_background == nullptr)
 		return 1;
 
 	//make main object
-	MainObject humanObject;
-	if (!humanObject.LoadIMG("Image/plane_fly.png"))
+	MainObject planeObject;
+	if (!planeObject.LoadIMG("Image/plane_fly.png"))
 		return 1;
-	humanObject.SetRect(100, 200);
+	planeObject.SetRect(100, 200);
 
 	//make Threat Object
 	ThreatObject* pThreadList = new ThreatObject[NUM_THREAT];
@@ -61,19 +61,19 @@ int main(int arc, char* argv[])
 				is_Quit = true;
 				break;
 			}
-			humanObject.HandleInputAction(g_event);
+			planeObject.HandleInputAction(g_event);
 		}
 
 		//Apply background case 1
-	/*	bkground_x -= 2;
+		bkground_x -= 2;
 		SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x, 0);
 		SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x + WIDTH, 0);
 
 		if (bkground_x <= -WIDTH)
-			bkground_x = 0;*/
+			bkground_x = 0;
 
 		//Apply background case 2
-		if (is_RunSCreen)
+		/*if (is_RunSCreen)
 		{
 			bkground_x -= 2;
 			if (bkground_x <= WIDTH - BG_WIDTH)
@@ -82,13 +82,13 @@ int main(int arc, char* argv[])
 				SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x, 0);
 		}
 		else
-			SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x, 0);
+			SDLCommonFunc::ApplySurface(g_background, g_screen, bkground_x, 0);*/
 
 
 		//implement main object
-		humanObject.Show(g_screen);
-		humanObject.HandleMove();
-		humanObject.makeAmo(g_screen);
+		planeObject.HandleMove();
+		planeObject.Show(g_screen);		
+		planeObject.makeAmo(g_screen);
 
 		//implement threat objects
 		ThreatObject* pThreat = nullptr;
@@ -97,9 +97,41 @@ int main(int arc, char* argv[])
 			pThreat = pThreadList + i;
 			if (pThreat != nullptr)
 			{
-				pThreat->Show(g_screen);
 				pThreat->HandleMove(WIDTH, HEIGHT);
+				pThreat->Show(g_screen);				
 				pThreat->makeAmo(g_screen, WIDTH, HEIGHT);
+
+				if (SDL_Flip(g_screen) == -1)
+					return 1; 
+
+				//check collision main and threats
+				bool is_Col = SDLCommonFunc::checkCollision(planeObject.GetRect(), pThreat->GetRect());
+				if (is_Col)
+				{
+					if (MessageBox(NULL, L"Game Over!!!!", L"Info", MB_OK) == IDOK)
+					{
+						delete[] pThreadList;
+						SDLCommonFunc::CleanUp();
+						SDL_Quit();
+						return 1;
+					}
+				}	
+
+				std::vector<AmoObject*> amo_List = planeObject.get_AmoList();
+				for (int im = 0; im < amo_List.size(); im++)
+				{
+					AmoObject* pAmo = amo_List.at(im);
+					if (pAmo != nullptr)
+					{
+						bool ret_Col = SDLCommonFunc::checkCollision(pAmo->GetRect(), pThreat->GetRect());
+						if (ret_Col)
+						{
+							planeObject.removeAmo(im);
+							pThreat->Reset(WIDTH + i * 400);
+						}
+					}
+
+				}
 			}
 		}
 

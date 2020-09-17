@@ -23,6 +23,7 @@ public:
 	std::vector<AmoObject*> get_AmoList() const { return p_AmoList; }
 
 	void makeAmo(SDL_Surface* g_screen);
+	void removeAmo(const int& idx);
 private:
 	int xVal;
 	int yVal;

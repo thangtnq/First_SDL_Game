@@ -16,7 +16,7 @@ public:
 	~ThreatObject();
 
 	void HandleMove(const int& xBorder, const int& yBorder);
-	void HandleInputACtion(SDL_Event e);
+	void HandleInputAction(SDL_Event e);
 
 	void set_xVal(const int& x) { xVal = x; }
 	void set_yVal(const int& y) { yVal = y; }
@@ -31,6 +31,8 @@ public:
 
 	void InitAmo(AmoObject* pAmo);
 	void makeAmo(SDL_Surface* des, const int& xLimit, const int& yLimit);
+	void Reset(const int& xborder);
+	void ResetAmo(AmoObject* pAmo);
 private:
 	int xVal;
 	int yVal;
