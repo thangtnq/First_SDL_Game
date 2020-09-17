@@ -1,4 +1,8 @@
 ﻿  MainObject.cpp
 C:\Users\Thang Tran\Desktop\SDL\GameSDLDemo\GameSDLDemo\MainObject.cpp(124,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Thang Tran\Desktop\SDL\GameSDLDemo\GameSDLDemo\MainObject.cpp(126,10): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+C:\Users\Thang Tran\Desktop\SDL\GameSDLDemo\GameSDLDemo\main.cpp(41,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Thang Tran\Desktop\SDL\GameSDLDemo\GameSDLDemo\main.cpp(118,25): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   GameSDLDemo.vcxproj -> C:\Users\Thang Tran\Desktop\SDL\GameSDLDemo\Debug\GameSDLDemo.exe

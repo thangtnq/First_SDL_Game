@@ -101,9 +101,6 @@ int main(int arc, char* argv[])
 				pThreat->Show(g_screen);				
 				pThreat->makeAmo(g_screen, WIDTH, HEIGHT);
 
-				if (SDL_Flip(g_screen) == -1)
-					return 1; 
-
 				//check collision main and threats
 				bool is_Col = SDLCommonFunc::checkCollision(planeObject.GetRect(), pThreat->GetRect());
 				if (is_Col)
