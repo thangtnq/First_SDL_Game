@@ -114,6 +114,26 @@ int main(int arc, char* argv[])
 					}
 				}	
 
+				std::vector<AmoObject*> threatAmo = pThreat->get_AmoList();
+				for (int ta = 0; ta < threatAmo.size(); ta++)
+				{
+					AmoObject* tAmo = threatAmo.at(ta);
+					if (tAmo != nullptr)
+					{
+						bool tAmo_Col = SDLCommonFunc::checkCollision(tAmo->GetRect(), planeObject.GetRect());
+						if (tAmo_Col)
+						{
+							if (MessageBox(NULL, L"Game Over!!!!", L"Info", MB_OK) == IDOK)
+							{
+								delete[] pThreadList;
+								SDLCommonFunc::CleanUp();
+								SDL_Quit();
+								return 1;
+							}
+						}
+					}
+				}
+
 				std::vector<AmoObject*> amo_List = planeObject.get_AmoList();
 				for (int im = 0; im < amo_List.size(); im++)
 				{
@@ -127,8 +147,9 @@ int main(int arc, char* argv[])
 							pThreat->Reset(WIDTH + i * 400);
 						}
 					}
-
 				}
+
+				
 			}
 		}
 
