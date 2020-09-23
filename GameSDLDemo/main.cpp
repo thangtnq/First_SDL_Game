@@ -1,6 +1,7 @@
 #include "Common_Function.h"
 #include "MainObject.h"
 #include "ThreatObject.h"
+#include "ExplosionObject.h"
 #include <time.h>
 #include <stdlib.h>
 
@@ -26,6 +27,12 @@ int main(int arc, char* argv[])
 	if (!planeObject.LoadIMG("Image/plane_fly.png"))
 		return 1;
 	planeObject.SetRect(100, 200);
+
+	//Init explosion object
+	ExplosionObject exp_main;
+	if (!exp_main.LoadIMG("Image/exp_main.png"))
+		return 1;
+	exp_main.setClip();
 
 	//make Threat Object
 	ThreatObject* pThreadList = new ThreatObject[NUM_THREAT];
@@ -105,6 +112,20 @@ int main(int arc, char* argv[])
 				bool is_Col = SDLCommonFunc::checkCollision(planeObject.GetRect(), pThreat->GetRect());
 				if (is_Col)
 				{
+					for (int ex = 0; ex < 4; ex++)
+					{
+						int x_pos = planeObject.GetRect().x + planeObject.GetRect().w * 0.5 - EXP_WIDTH * 0.5;
+						int y_pos = planeObject.GetRect().y + planeObject.GetRect().h * 0.5 - EXP_HEIGHT * 0.5;
+
+						exp_main.setFrame(ex);
+						exp_main.SetRect(x_pos, y_pos);
+						exp_main.showEx(g_screen);
+						SDL_Delay(100);
+
+						if (SDL_Flip(g_screen) == -1)
+							return 1;
+					}
+
 					if (MessageBox(NULL, L"Game Over!!!!", L"Info", MB_OK) == IDOK)
 					{
 						delete[] pThreadList;

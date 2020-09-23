@@ -87,3 +87,10 @@ bool SDLCommonFunc::checkCollision(const SDL_Rect& object1, const SDL_Rect& obje
 	return false;
 }
 
+void SDLCommonFunc::ApplySurfaceClip(SDL_Surface* src, SDL_Surface* des, SDL_Rect* clip, const int& x, const int& y)
+{
+	SDL_Rect offset;
+	offset.x = x;
+	offset.y = y;
+	SDL_BlitSurface(src, clip, des, &offset);
+}

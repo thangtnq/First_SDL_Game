@@ -23,5 +23,6 @@ namespace SDLCommonFunc
 	void ApplySurface(SDL_Surface* src, SDL_Surface* des, const int& x, const int& y);
 	void CleanUp();
 	bool checkCollision(const SDL_Rect& object1, const SDL_Rect& object2);
+	void ApplySurfaceClip(SDL_Surface* src, SDL_Surface* des, SDL_Rect* clip, const int& x, const int& y);
 }
 
