@@ -11,7 +11,7 @@
 
 int main(int arc, char* argv[])
 {
-	bool is_RunSCreen = true;
+	bool is_RunScreen = true;
 	int bkground_x = 0;
 	bool is_Quit = false;
 	if (!SDLCommonFunc::Init())
