@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 
+
 #undef main
 
 
@@ -33,6 +34,11 @@ int main(int arc, char* argv[])
 	if (!exp_main.LoadIMG("Image/exp_main.png"))
 		return 1;
 	exp_main.setClip();
+
+	ExplosionObject exp_threats;
+	if (!exp_threats.LoadIMG("Image/exp.png"))
+		return 1;
+	exp_threats.setClip();
 
 	//make Threat Object
 	ThreatObject* pThreadList = new ThreatObject[NUM_THREAT];
@@ -68,7 +74,7 @@ int main(int arc, char* argv[])
 				is_Quit = true;
 				break;
 			}
-			planeObject.HandleInputAction(g_event);
+			planeObject.HandleInputAction(g_event, g_sound_bullet);
 		}
 
 		//Apply background case 1
@@ -126,6 +132,8 @@ int main(int arc, char* argv[])
 							return 1;
 					}
 
+					Mix_PlayChannel(-1, g_sound_exp[0], 0);
+
 					if (MessageBox(NULL, L"Game Over!!!!", L"Info", MB_OK) == IDOK)
 					{
 						delete[] pThreadList;
@@ -135,6 +143,7 @@ int main(int arc, char* argv[])
 					}
 				}	
 
+				//collision: Threat Amo vs Main
 				std::vector<AmoObject*> threatAmo = pThreat->get_AmoList();
 				for (int ta = 0; ta < threatAmo.size(); ta++)
 				{
@@ -155,6 +164,8 @@ int main(int arc, char* argv[])
 					}
 				}
 
+
+				//Collision: Main Amo vs Threat
 				std::vector<AmoObject*> amo_List = planeObject.get_AmoList();
 				for (int im = 0; im < amo_List.size(); im++)
 				{
@@ -164,8 +175,26 @@ int main(int arc, char* argv[])
 						bool ret_Col = SDLCommonFunc::checkCollision(pAmo->GetRect(), pThreat->GetRect());
 						if (ret_Col)
 						{
+							for (int tx = 0; tx < 4; tx++)
+							{
+								int xpos = pAmo->GetRect().x - EXP_WIDTH * 0.5;
+								int ypos = pAmo->GetRect().y - EXP_HEIGHT * 0.5;
+
+								exp_threats.setFrame(tx);
+								exp_threats.SetRect(xpos, ypos);
+								exp_threats.showEx(g_screen);
+								if (SDL_Flip(g_screen) == -1)
+
+								{
+									delete[] pThreadList;
+									SDLCommonFunc::CleanUp();
+									SDL_Quit();
+									return 0;
+								}
+							}
 							planeObject.removeAmo(im);
 							pThreat->Reset(WIDTH + i * 400);
+							Mix_PlayChannel(-1, g_sound_exp[0], 0);
 						}
 					}
 				}
@@ -176,7 +205,13 @@ int main(int arc, char* argv[])
 
 		//update screen
 		if (SDL_Flip(g_screen) == -1)
+		{
+			delete[] pThreadList;
+			SDLCommonFunc::CleanUp();
+			SDL_Quit();
 			return 1;
+		}
+			
 	}
 
 	delete[] pThreadList;

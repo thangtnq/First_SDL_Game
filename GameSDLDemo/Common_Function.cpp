@@ -5,6 +5,9 @@ SDL_Surface* g_screen = nullptr;
 SDL_Surface* g_background = nullptr;
 SDL_Event g_event;
 
+Mix_Chunk* g_sound_bullet[2];
+Mix_Chunk* g_sound_exp[2];
+
 SDL_Surface* SDLCommonFunc::LoadImage(std::string filePath)
 {
 	SDL_Surface* image = nullptr;
@@ -44,6 +47,18 @@ bool SDLCommonFunc::Init()
 	g_screen = SDL_SetVideoMode(WIDTH, HEIGHT, BPP, SDL_SWSURFACE);
 	if (g_screen == nullptr)
 		return false;
+
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+		return false;
+
+	//read file wav audio
+	g_sound_bullet[0] = Mix_LoadWAV("Sound/Cannon+3.wav");
+	g_sound_bullet[1] = Mix_LoadWAV("Sound/Machine+Gun+4.wav");
+	g_sound_exp[0] = Mix_LoadWAV("Sound/Explosion+3.wav");
+
+	if (g_sound_exp[0] == nullptr || g_sound_bullet[0] == nullptr || g_sound_bullet[1] == nullptr)
+		return false;
+
 	return true;
 }
 

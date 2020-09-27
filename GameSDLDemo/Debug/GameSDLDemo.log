@@ -1,0 +1,9 @@
+﻿  main.cpp
+C:\Users\Thang Tran\Desktop\SDL\SDL_Demo\First_SDL_Game\GameSDLDemo\main.cpp(54,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Thang Tran\Desktop\SDL\SDL_Demo\First_SDL_Game\GameSDLDemo\main.cpp(123,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Thang Tran\Desktop\SDL\SDL_Demo\First_SDL_Game\GameSDLDemo\main.cpp(124,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Thang Tran\Desktop\SDL\SDL_Demo\First_SDL_Game\GameSDLDemo\main.cpp(148,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Thang Tran\Desktop\SDL\SDL_Demo\First_SDL_Game\GameSDLDemo\main.cpp(170,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Thang Tran\Desktop\SDL\SDL_Demo\First_SDL_Game\GameSDLDemo\main.cpp(180,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Thang Tran\Desktop\SDL\SDL_Demo\First_SDL_Game\GameSDLDemo\main.cpp(181,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  GameSDLDemo.vcxproj -> C:\Users\Thang Tran\Desktop\SDL\SDL_Demo\First_SDL_Game\Debug\GameSDLDemo.exe

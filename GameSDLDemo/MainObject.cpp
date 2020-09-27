@@ -12,7 +12,7 @@ MainObject::MainObject() :
 MainObject::~MainObject()
 {}
 
-void MainObject::HandleInputAction(SDL_Event e)
+void MainObject::HandleInputAction(SDL_Event e, Mix_Chunk* bulletSound[2])
 {
 	if (e.type == SDL_KEYDOWN)
 	{
@@ -58,12 +58,14 @@ void MainObject::HandleInputAction(SDL_Event e)
 			pAmo->Set_Width_Height(LASER_WIDTH, LASER_HEIGHT);
 			pAmo->LoadIMG("Image/laser.png");
 			pAmo->set_type(AmoObject::LASER);
+			Mix_PlayChannel(-1, bulletSound[0], 0);
 		}
 		else if (e.button.button == SDL_BUTTON_RIGHT)
 		{
 			pAmo->Set_Width_Height(SPHERE_WIDTH, SPHERE_HEIGHT);
 			pAmo->LoadIMG("Image/sphere.png");
 			pAmo->set_type(AmoObject::SPHERE);
+			Mix_PlayChannel(-1, bulletSound[1], 0);
 		}
 
 		pAmo->SetRect(this->rect.x + this->rect.w - 40, this->rect.y + this->rect.h*4/5);

@@ -4,6 +4,7 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 
 const int HEIGHT = 600;
 const int WIDTH = 1200;
@@ -15,6 +16,10 @@ const int BG_HEIGHT = 600;
 extern SDL_Surface* g_screen;
 extern SDL_Surface* g_background;
 extern SDL_Event g_event;
+
+extern Mix_Chunk* g_sound_bullet[2];
+extern Mix_Chunk* g_sound_exp[2];
+
 
 namespace SDLCommonFunc
 {
